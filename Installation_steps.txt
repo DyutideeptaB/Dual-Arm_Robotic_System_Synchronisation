@@ -1,0 +1,150 @@
+**“Quick Start Guide: Setting up PyBullet on Windows + VS Code (Python 3.10)”** that summarizes everything we did step-by-step.
+You can save or share this as your setup reference.
+
+---
+
+# 🧭 PyBullet Setup Guide — Windows + Python 3.10 + VS Code
+
+## 🧩 1. Install Python 3.10
+
+* Download from the official site: [https://www.python.org/downloads/](https://www.python.org/downloads/)
+* During installation:
+
+  * ✅ Check **“Add Python to PATH”**
+  * Choose **Install for all users** (recommended)
+
+Verify:
+
+```bash
+python --version
+```
+
+---
+
+## 🧩 2. Upgrade pip & basic build tools
+
+Open **Command Prompt (cmd)** or **PowerShell** and run:
+
+```bash
+pip install --upgrade pip setuptools wheel
+```
+
+---
+
+## 🧩 3. Install PyBullet
+
+### ✅ Option A — Use the prebuilt binary (recommended)
+
+1. Visit [https://www.lfd.uci.edu/~gohlke/pythonlibs/#pybullet](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pybullet)
+2. Download the wheel that matches your setup, e.g.
+   `pybullet-3.2.5-cp310-cp310-win_amd64.whl`
+3. Install it:
+
+   ```bash
+   pip install "C:\Users\<YourName>\Downloads\pybullet-3.2.5-cp310-cp310-win_amd64.whl"
+   ```
+
+### Option B — Compile from source (requires MS Build Tools)
+
+1. Install [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+2. Select **“Desktop development with C++”**
+3. After installation:
+
+   ```bash
+   pip install pybullet
+   ```
+
+Verify:
+
+```bash
+python -c "import pybullet; print(pybullet.__version__)"
+```
+
+---
+
+## 🧩 4. Install and configure VS Code
+
+1. Download VS Code: [https://code.visualstudio.com/](https://code.visualstudio.com/)
+2. Open VS Code → **Extensions (Ctrl + Shift + X)** → install **Python** (by Microsoft).
+
+---
+
+## 🧩 5. Open your project folder
+
+Create a folder such as:
+
+```
+C:\Users\<YourName>\Documents\pybullet_projects\
+```
+
+Open it in VS Code (**File → Open Folder**).
+
+---
+
+## 🧩 6. Select the correct Python interpreter
+
+In VS Code:
+
+1. Press **Ctrl + Shift + P**
+2. Type `Python: Select Interpreter`
+3. Pick your Python 3.10 interpreter — the same one where PyBullet is installed.
+   Example:
+   `Python 3.10 (C:\Users\<YourName>\AppData\Local\Programs\Python\Python310\python.exe)`
+
+Confirm in the VS Code terminal:
+
+```bash
+python -m pip show pybullet
+```
+
+You should see the package info.
+
+---
+
+## 🧩 7. Test PyBullet
+
+Create a file **test_pybullet.py**:
+
+```python
+import pybullet as p
+import pybullet_data
+
+physicsClient = p.connect(p.GUI)
+p.setAdditionalSearchPath(pybullet_data.getDataPath())
+planeId = p.loadURDF("plane.urdf")
+p.setGravity(0, 0, -9.8)
+
+input("Press Enter to exit...")
+p.disconnect()
+```
+
+Run it (▶ Run Python File or F5).
+A PyBullet physics window should appear.
+
+---
+
+## 🧩 8. (Optional) Use a virtual environment
+
+For cleaner robotics projects:
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install pybullet
+```
+
+Then in VS Code, again select the **venv** interpreter.
+
+---
+
+✅ **You now have a working PyBullet + VS Code setup!**
+
+From here you can start:
+
+* Loading URDFs and controlling robots
+* Writing simulations and reinforcement-learning scripts
+* Integrating with `pybullet_envs`, `gym`, etc.
+
+---
+
+Would you like me to extend this guide with a **“Next Steps” section** (e.g. simulating a 6-DoF UR robot and picking an object — your next goal)?

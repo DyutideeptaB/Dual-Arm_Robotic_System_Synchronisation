@@ -1,0 +1,22 @@
+Dual-Arm_Robotic_System_Synchronisation\ur_description\real_step5\Final_python_file.py - this is the final python code
+Dual-Arm_Robotic_System_Synchronisation\ur_description\real_step5\Final_with_logs.py - this is the final python code along with logs of evaluation
+Dual-Arm_Robotic_System_Synchronisation\ur_description\real_step5\Evaluation.py - this is the script that generates the evaluation plot  
+
+
+Dual-Arm_Robotic_System_Synchronisation\franka_panda
+    This folder has URDF files for Franka robot (the tall camera one)
+
+Dual-Arm_Robotic_System_Synchronisation\Robotiq-2f-85
+    This folder has URDF files for the Gripper which we do not use now
+
+
+Dual-Arm_Robotic_System_Synchronisation\universal_robot
+    This has some extra code for UR3 robot 
+    We can ignore this folder
+
+Dual-Arm_Robotic_System_Synchronisation\ur_description
+    This folder has URDF files for the UR3 robot (the small one that actually needs to pick the object up)
+    
+
+Dual-Arm_Robotic_System_Synchronisation\ur_description\real_step5
+    This folder also has python files for the robots. Some are in this folder and some are in the sub folder 

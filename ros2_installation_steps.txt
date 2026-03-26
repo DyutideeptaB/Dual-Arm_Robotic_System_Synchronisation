@@ -1,0 +1,18 @@
+Web page:
+    https://docs.ros.org/en/kilted/Installation.html
+    https://docs.ros.org/en/kilted/Installation/Windows-Install-Binary.html
+
+
+Each time you have to do :
+    cd C:\pixi_ws
+    pixi shell
+    call ros2-jazzy-20250820-windows-release-amd64\ros2-windows\local_setup.bat
+
+Got error for pixi shell so did this:
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+pixi shell
+
+
+
+Trying to use xacro
+    python -m pip install xacro
