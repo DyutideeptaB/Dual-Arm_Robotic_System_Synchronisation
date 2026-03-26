@@ -194,10 +194,8 @@ python Final_with_logs.py
 │   |
 |   ├── ros2_installation_steps.txt
 |
-├── Result_visualisations/
-│   └── tracking_log.csv
-|
-└── README.md ```</pre>
+└── Result_visualisations/
+    └── tracking_log.csv ```</pre>
 ------------------------------------------------------------------------
 
 ## 📊 Outputs
