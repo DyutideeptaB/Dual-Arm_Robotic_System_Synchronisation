@@ -173,7 +173,7 @@ python Final_with_logs.py
 
 ## 📁 Folder Structure
 
-Dual-Arm_Robotic_System_Synchronisation/
+<pre>```Dual-Arm_Robotic_System_Synchronisation/
 │
 ├── README.md
 ├── requirements.txt
@@ -196,7 +196,8 @@ Dual-Arm_Robotic_System_Synchronisation/
 |
 ├── Result_visualisations/
 │   └── tracking_log.csv
-
+|
+└── README.md ```</pre>
 ------------------------------------------------------------------------
 
 ## 📊 Outputs
