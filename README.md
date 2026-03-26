@@ -171,6 +171,34 @@ python Final_with_logs.py
 
 ------------------------------------------------------------------------
 
+## 📁 Folder Structure
+
+Dual-Arm_Robotic_System_Synchronisation/
+│
+├── README.md
+├── requirements.txt
+├── Movement_with_logs.py
+│
+├── assets/
+│   ├── franka_panda/              
+│   |   ├── franka_h2/...
+|   |
+|   ├── ur_description_/                 
+│   │   ├── urdf/
+│   │   ├── meshes/
+|   |
+|   ├── universal_robot/
+│   |    ├── all file...
+|   |
+|   ├── installation_steps.txt
+│   |
+|   ├── ros2_installation_steps.txt
+|
+├── Result_visualisations/
+│   └── tracking_log.csv
+
+------------------------------------------------------------------------
+
 ## 📊 Outputs
 
 -   Pixel error vs time
