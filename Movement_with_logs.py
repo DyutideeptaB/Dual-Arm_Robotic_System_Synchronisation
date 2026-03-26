@@ -4,14 +4,27 @@ import pybullet as p
 import pybullet_data
 import cv2
 from filterpy.kalman import KalmanFilter
-import pandas as pd  # for saving tracking_log.csv
+import pandas as pd  
 
-# =================================================================
-# 1. CONFIGURATION & PARAMETERS
-# =================================================================
-# FILE PATHS:
-UR3_ROOT = "E:/Projects/Dual-Arm_Robotic_System_Synchronisation/ur_description" #Define your path
-FRANKA_ROOT = "E:/Projects/Dual-Arm_Robotic_System_Synchronisation/franka_panda/franka_h2" #Define your path
+## -----------------------------------------------------------------
+# FILE PATHS (PORTABLE VERSION)
+# -----------------------------------------------------------------
+
+# Base directory (where this script is located)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Your actual folder structure
+UR3_ROOT = os.path.join(BASE_DIR, "ur_description")
+FRANKA_ROOT = os.path.join(BASE_DIR, "franka_panda", "franka_h2")
+
+# Safety checks (important for reproducibility)
+if not os.path.exists(UR3_ROOT):
+    raise FileNotFoundError(f"UR3 path not found: {UR3_ROOT}")
+
+if not os.path.exists(FRANKA_ROOT):
+    raise FileNotFoundError(f"Franka path not found: {FRANKA_ROOT}")
+
+#--------------------------------------------------------------------
 
 # VISUAL PARAMETERS:
 WIDTH, HEIGHT = 320, 240
@@ -553,13 +566,27 @@ finally:
     try:
         if len(log) > 0:
             df = pd.DataFrame(log)
-            out_path = os.path.abspath("Result_visualisations/tracking_log.csv")
+
+            # Base directory (same as script location)
+            BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+            # Output folder
+            output_dir = os.path.join(BASE_DIR, "Result_visualisations")
+  
+            # Create folder if it doesn't exist
+            os.makedirs(output_dir, exist_ok=True)
+
+            # Full output path
+            out_path = os.path.join(output_dir, f"tracking_log_{int(time.time())}.csv")
+
             df.to_csv(out_path, index=False)
+
             print(f"Saved log to {out_path} (rows: {len(log)})")
         else:
             print("Log was empty, nothing saved.")
+
     except Exception as e:
         print("Error while saving log:", e)
 
-    p.disconnect()
-    cv2.destroyAllWindows()
+p.disconnect()
+cv2.destroyAllWindows()

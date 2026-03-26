@@ -3,14 +3,27 @@ import numpy as np
 import pybullet as p
 import pybullet_data
 import cv2
-import pandas as pd  # for saving tracking_log.csv
+import pandas as pd  
 
-# =================================================================
-# 1. CONFIGURATION & PARAMETERS
-# =================================================================
-# FILE PATHS:
-UR3_ROOT = "E:/Projects/Dual-Arm_Robotic_System_Synchronisation/ur_description" #Define your path
-FRANKA_ROOT = "E:/Projects/Dual-Arm_Robotic_System_Synchronisation/franka_panda/franka_h2" #Define your path
+## -----------------------------------------------------------------
+# FILE PATHS (PORTABLE VERSION)
+# -----------------------------------------------------------------
+
+# Base directory (where this script is located)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Your actual folder structure
+UR3_ROOT = os.path.join(BASE_DIR, "ur_description")
+FRANKA_ROOT = os.path.join(BASE_DIR, "franka_panda", "franka_h2")
+
+# Safety checks (important for reproducibility)
+if not os.path.exists(UR3_ROOT):
+    raise FileNotFoundError(f"UR3 path not found: {UR3_ROOT}")
+
+if not os.path.exists(FRANKA_ROOT):
+    raise FileNotFoundError(f"Franka path not found: {FRANKA_ROOT}")
+
+#--------------------------------------------------------------------
 
 # VISUAL PARAMETERS:
 WIDTH, HEIGHT = 320, 240
@@ -69,9 +82,15 @@ log = []  # list of dicts, filled each timestep
 # 2. ENVIRONMENT SETUP
 # =================================================================
 p.connect(p.GUI)
+
+# IMPORTANT: Add search paths for assets
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
+p.setAdditionalSearchPath(UR3_ROOT)
+p.setAdditionalSearchPath(FRANKA_ROOT)
+
 p.resetSimulation()
 p.setGravity(0, 0, -9.81)
+
 p.loadURDF("plane.urdf")
 
 # --- Load UR3 ---
@@ -450,16 +469,30 @@ finally:
     # =================================================================
     # 6. SAVE LOG & CLEANUP (always executed)
     # =================================================================
-    try:
-        if len(log) > 0:
-            df = pd.DataFrame(log)
-            out_path = os.path.abspath("tracking_log.csv")
-            df.to_csv(out_path, index=False)
-            print(f"Saved log to {out_path} (rows: {len(log)})")
-        else:
-            print("Log was empty, nothing saved.")
-    except Exception as e:
-        print("Error while saving log:", e)
+   try:
+    if len(log) > 0:
+        df = pd.DataFrame(log)
 
-    p.disconnect()
-    cv2.destroyAllWindows()
+        # Base directory (same as script location)
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+        # Output folder
+        output_dir = os.path.join(BASE_DIR, "Result_visualisations")
+
+        # Create folder if it doesn't exist
+        os.makedirs(output_dir, exist_ok=True)
+
+        # Full output path
+        out_path = os.path.join(output_dir, f"tracking_log_{int(time.time())}.csv")
+
+        df.to_csv(out_path, index=False)
+
+        print(f"Saved log to {out_path} (rows: {len(log)})")
+    else:
+        print("Log was empty, nothing saved.")
+
+   except Exception as e:
+       print("Error while saving log:", e)
+
+p.disconnect()
+cv2.destroyAllWindows()

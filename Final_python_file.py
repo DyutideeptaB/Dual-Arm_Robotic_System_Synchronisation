@@ -4,12 +4,25 @@ import pybullet as p
 import pybullet_data
 import cv2
 
-# =================================================================
-# 1. CONFIGURATION & PARAMETERS
-# =================================================================
-# FILE PATHS:
-UR3_ROOT = "E:/Projects/Dual-Arm_Robotic_System_Synchronisation/ur_description" #Define your path
-FRANKA_ROOT = "E:/Projects/Dual-Arm_Robotic_System_Synchronisation/franka_panda/franka_h2" #Define your path
+# -----------------------------------------------------------------
+# FILE PATHS (PORTABLE VERSION)
+# -----------------------------------------------------------------
+
+# Base directory (where this script is located)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Your actual folder structure
+UR3_ROOT = os.path.join(BASE_DIR, "ur_description")
+FRANKA_ROOT = os.path.join(BASE_DIR, "franka_panda", "franka_h2")
+
+# Safety checks (important for reproducibility)
+if not os.path.exists(UR3_ROOT):
+    raise FileNotFoundError(f"UR3 path not found: {UR3_ROOT}")
+
+if not os.path.exists(FRANKA_ROOT):
+    raise FileNotFoundError(f"Franka path not found: {FRANKA_ROOT}")
+
+#--------------------------------------------------------------------
 
 # VISUAL PARAMETERS:
 WIDTH, HEIGHT = 320, 240
@@ -65,9 +78,15 @@ UR3_GOAL_ALPHA = 0.7        # 0..1, smaller = heavier smoothing (we use 0.7 + st
 # 2. ENVIRONMENT SETUP
 # =================================================================
 p.connect(p.GUI)
+
+# IMPORTANT: Add search paths for assets
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
+p.setAdditionalSearchPath(UR3_ROOT)
+p.setAdditionalSearchPath(FRANKA_ROOT)
+
 p.resetSimulation()
 p.setGravity(0, 0, -9.81)
+
 p.loadURDF("plane.urdf")
 
 # --- Load UR3 ---
