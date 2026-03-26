@@ -147,6 +147,7 @@ Smoothing:
 -   Handles noisy detections
 -   Handles occlusions
 -   Multi-frame consistency checks
+-   Kalmann Filter for pose estimation
 
 ------------------------------------------------------------------------
 
@@ -165,7 +166,7 @@ Smoothing:
 git clone https://github.com/DyutideeptaB/Dual-Arm_Robotic_System_Synchronisation.git
 cd Dual-Arm_Robotic_System_Synchronisation
 pip install -r requirements.txt
-python Movement_with_logs.py
+python Final_with_logs.py
 ```
 
 ------------------------------------------------------------------------
