@@ -199,10 +199,8 @@ python Final_with_logs.py
 
 ## 👤 Author
 
-**Dyutideepta Banerjee**
+**Dyutideepta Banerjee**\
 Physics + AI \| Simulation Driven Systems \| Computer Vision
-
-------------------------------------------------------------------------
 
 ## 📫 Contact  
 [LinkedIn](https://www.linkedin.com/in/dyutideepta-banerjee/) | [Email](mailto:dyutideepta.banerjee@gmail.com)
