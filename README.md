@@ -6,21 +6,18 @@
 
 ## 📌 Overview
 
-This project implements a **dual-arm robotic system** in simulation,
-where:
+This project implements a **dual-arm robotic system** in simulation, where:
 
--   A **UR3 manipulator (Worker)** performs object manipulation and
-    trajectory execution\
--   A **Franka Emika Panda (Observer)** provides visual feedback via an
-    eye-in-hand camera
+-   A **UR3 manipulator (Worker)** performs object manipulation and trajectory execution
+-   A **Franka Emika Panda (Observer)** provides visual feedback via an eye-in-hand camera
 
 The system demonstrates **decentralised coordination**, where:
 
 > No direct joint/state sharing exists between robots --- coordination
 > emerges purely through **vision-based feedback and control loops**.
 
-The primary task involves: - Picking a cube using visual estimation\
-- Executing a smooth **infinity (∞) trajectory**\
+The primary task involves: - Picking a cube using visual estimation
+- Executing a smooth **infinity (∞) trajectory**
 - Maintaining continuous visual tracking under noise and occlusion
 
 ------------------------------------------------------------------------
@@ -94,9 +91,9 @@ Jacobian-based control:
 
 Finite state machine:
 
-1.  **WAIT_FOR_CAM** -- waits for stable visual estimate\
-2.  **APPROACH** -- moves to pick position\
-3.  **LIFT** -- lifts object to safe pose\
+1.  **WAIT_FOR_CAM** -- waits for stable visual estimate
+2.  **APPROACH** -- moves to pick position
+3.  **LIFT** -- lifts object to safe pose
 4.  **MOVE\_∞** -- executes infinity trajectory
 
 Smoothing:
@@ -109,21 +106,21 @@ Smoothing:
 
 #### Detection Pipeline
 
--   RGB → HSV conversion\
--   Red colour thresholding\
+-   RGB → HSV conversion
+-   Red colour thresholding
 -   Centroid detection
 
 #### Tracking States
 
--   SEARCH\
--   TRACKING\
--   TEMP_LOST\
+-   SEARCH
+-   TRACKING
+-   TEMP_LOST
 -   LOST
 
 #### Control
 
--   Pixel error → velocity\
--   Jacobian inverse\
+-   Pixel error → velocity
+-   Jacobian inverse
 -   Velocity clipping
 
 ------------------------------------------------------------------------
@@ -132,37 +129,32 @@ Smoothing:
 
 ### 📊 Logging System
 
--   Pixel error: `e_x(t), e_y(t)`\
--   End-effector error:
-
-```{=html}
-<!-- -->
-```
-    e_EE(t) = || p_EE(t) - p_ref(t) ||
+-   Pixel error: `e_x(t), e_y(t)`
+-   End-effector error: `e_EE(t) = || p_EE(t) - p_ref(t) ||`
 
 ------------------------------------------------------------------------
 
 ### 🔁 Stability Improvements
 
--   First-order smoothing\
--   Buffered cube position estimation\
+-   First-order smoothing
+-   Buffered cube position estimation
 -   Cluster-based validation
 
 ------------------------------------------------------------------------
 
 ### 🧩 Robustness Features
 
--   Handles noisy detections\
--   Handles occlusions\
+-   Handles noisy detections
+-   Handles occlusions
 -   Multi-frame consistency checks
 
 ------------------------------------------------------------------------
 
 ## 🚀 Tech Stack
 
--   Python\
--   PyBullet\
--   NumPy\
+-   Python
+-   PyBullet
+-   NumPy
 -   OpenCV
 
 ------------------------------------------------------------------------
@@ -180,26 +172,26 @@ python Movement_with_logs.py
 
 ## 📊 Outputs
 
--   Pixel error vs time\
--   End-effector tracking error\
+-   Pixel error vs time
+-   End-effector tracking error
 -   Infinity trajectory (reference vs actual)
 
 ------------------------------------------------------------------------
 
 ## 🔬 Applications
 
--   Collaborative robotics\
--   Industrial automation\
--   Visual servoing research\
+-   Collaborative robotics
+-   Industrial automation
+-   Visual servoing research
 -   Multi-agent systems
 
 ------------------------------------------------------------------------
 
 ## 📈 Future Work
 
--   Reinforcement learning integration\
--   Real robot deployment\
--   Multi-object tracking\
+-   Reinforcement learning integration
+-   Real robot deployment
+-   Multi-object tracking
 -   Dynamic environments
 
 ------------------------------------------------------------------------
@@ -207,7 +199,7 @@ python Movement_with_logs.py
 ## 👤 Author
 
 **Dyutideepta Banerjee**\
-Physics + AI \| Robotics \| Computer Vision
+Physics + AI \| Simulation Driven Systems \| Computer Vision
 
 ------------------------------------------------------------------------
 
