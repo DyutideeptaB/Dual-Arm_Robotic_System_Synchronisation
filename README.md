@@ -147,7 +147,7 @@ Smoothing:
 -   Handles noisy detections
 -   Handles occlusions
 -   Multi-frame consistency checks
--   Kalmann Filter for pose estimation
+-   Kalman Filter for pose estimation
 
 ------------------------------------------------------------------------
 
