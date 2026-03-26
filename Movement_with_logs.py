@@ -6,26 +6,31 @@ import cv2
 from filterpy.kalman import KalmanFilter
 import pandas as pd  
 
-## -----------------------------------------------------------------
+## -----------------------------------------------------------
 # FILE PATHS (PORTABLE VERSION)
-# -----------------------------------------------------------------
+## -----------------------------------------------------------
 
-# Base directory (where this script is located)
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Handle both script + notebook environments
+try:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+except NameError:
+    BASE_DIR = os.getcwd()   # fallback for Jupyter / interactive
+
 ASSETS_PATH = os.path.join(BASE_DIR, "assets")
 
-# Your actual folder structure
 UR3_ROOT = os.path.join(ASSETS_PATH, "ur_description")
 FRANKA_ROOT = os.path.join(ASSETS_PATH, "franka_panda", "franka_h2")
 
-# Safety checks (important for reproducibility)
+# Safety checks
 if not os.path.exists(UR3_ROOT):
     raise FileNotFoundError(f"UR3 path not found: {UR3_ROOT}")
 
 if not os.path.exists(FRANKA_ROOT):
     raise FileNotFoundError(f"Franka path not found: {FRANKA_ROOT}")
 
-#--------------------------------------------------------------------
+
+## ===========================================================
+
 
 # VISUAL PARAMETERS:
 WIDTH, HEIGHT = 320, 240
@@ -118,13 +123,19 @@ log = []  # list of dicts, filled each timestep
 # =================================================================
 # 2. ENVIRONMENT SETUP
 # =================================================================
+
+# Avoid multiple GUI connections
+if p.isConnected():
+    p.disconnect()
+
 p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
 p.setAdditionalSearchPath(ASSETS_PATH)
 
 p.resetSimulation()
 p.setGravity(0, 0, -9.81)
-p.loadURDF("plane.urdf")
+plane_path = os.path.join(pybullet_data.getDataPath(), "plane.urdf")
+p.loadURDF(plane_path)
 
 # --- Load UR3 ---
 ur3_urdf = os.path.join(UR3_ROOT, "urdf", "ur3.urdf")
