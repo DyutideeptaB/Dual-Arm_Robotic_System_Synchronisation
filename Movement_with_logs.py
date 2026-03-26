@@ -12,10 +12,11 @@ import pandas as pd
 
 # Base directory (where this script is located)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ASSETS_PATH = os.path.join(BASE_DIR, "assets")
 
 # Your actual folder structure
-UR3_ROOT = os.path.join(BASE_DIR, "ur_description")
-FRANKA_ROOT = os.path.join(BASE_DIR, "franka_panda", "franka_h2")
+UR3_ROOT = os.path.join(ASSETS_PATH, "ur_description")
+FRANKA_ROOT = os.path.join(ASSETS_PATH, "franka_panda", "franka_h2")
 
 # Safety checks (important for reproducibility)
 if not os.path.exists(UR3_ROOT):
@@ -119,6 +120,8 @@ log = []  # list of dicts, filled each timestep
 # =================================================================
 p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
+p.setAdditionalSearchPath(ASSETS_PATH)
+
 p.resetSimulation()
 p.setGravity(0, 0, -9.81)
 p.loadURDF("plane.urdf")
